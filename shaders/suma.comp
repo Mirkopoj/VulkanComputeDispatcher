@@ -1,0 +1,15 @@
+#version 450
+
+layout(local_size_x = 16, local_size_y = 16) in;
+layout(binding = 0) buffer InBuff {
+	int data[];
+} inBuff;
+layout(binding = 1) buffer OutBuff {
+	int data[];
+} outBuff;
+
+void main() {	
+	uint width = gl_WorkGroupSize.x * gl_NumWorkGroups.x; 
+	uint index = gl_GlobalInvocationID.x + gl_GlobalInvocationID.y * width;
+	outBuff.data[index] = inBuff.data[index] + 100;
+}
