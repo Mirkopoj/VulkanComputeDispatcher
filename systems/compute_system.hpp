@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vulkan/vulkan_core.h>
+
 #include <string>
 
 #include "../lve/lve_device.hpp"
@@ -19,8 +20,9 @@ class ComputeSystem {
    ~ComputeSystem();
 
    void dispatch(int width, int height, int channels,
-                 VkDescriptorSet &DescriptorSet);
-   void await();
+                 VkDescriptorSet &DescriptorSet,
+                 VkCommandBuffer &CmdBuffer);
+   void await(VkCommandBuffer &CmdBuffer);
    void instant_dispatch(int width, int height, int channels,
                          VkDescriptorSet &DescriptorSet);
 
@@ -38,6 +40,9 @@ class ComputeSystem {
    void createPipeline();
    void createShaderModule(const std::string &);
    std::vector<char> readFile(const std::string &filepath);
+
+   static VkPipeline bindedPipeline;
+   static VkDescriptorSet bindedDescriptorSet;
 };
 
 }  // namespace lve

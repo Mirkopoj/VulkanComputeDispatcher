@@ -11,7 +11,7 @@ namespace lve {
 
 class FirstApp {
   public:
-   FirstApp();
+   FirstApp(int lado);
    ~FirstApp();
 
    FirstApp(const FirstApp &) = delete;
@@ -23,5 +23,7 @@ class FirstApp {
    LveDevice lveDevice;
 
    std::unique_ptr<LveDescriptorPool> computePool{};
+
+	int lado;
 };
 }  // namespace lve

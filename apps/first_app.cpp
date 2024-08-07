@@ -19,12 +19,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
-// std
-#include <imgui.h>
-
 namespace lve {
 
-FirstApp::FirstApp() {
+FirstApp::FirstApp(int lado): lado(lado) {
    computePool = LveDescriptorPool::Builder(lveDevice)
                      .setMaxSets(2)
                      .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 2)
@@ -48,8 +45,8 @@ void FirstApp::run() {
        {computeDescriptorSetLayout->getDescriptorSetLayout()},
        "shaders/suma.comp.spv"};
 
-   const int width = 10;
-   const int heigth = 10;
+   const int width = lado;
+   const int heigth = lado;
    std::vector<int> cpuBuffer;
    std::cout << "Input\n";
    for (int j = 0; j < heigth; ++j) {
